@@ -328,8 +328,15 @@ def upload_pcap():
     threshold = float(request.form.get('threshold', 0.035))
     target_pcap_path = None
     
+    pcap_file = None
     if 'file' in request.files:
         pcap_file = request.files['file']
+    elif 'pcap' in request.files:
+        pcap_file = request.files['pcap']
+    elif len(request.files) > 0:
+        pcap_file = next(iter(request.files.values()))
+
+    if pcap_file is not None:
         if pcap_file.filename == '':
             return jsonify({'error': 'No selected file'}), 400
             
