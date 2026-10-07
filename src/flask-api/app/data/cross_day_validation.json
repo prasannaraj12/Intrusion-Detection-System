@@ -1,0 +1,56 @@
+{
+  "experiment": "Cross-Day Zero-Shot Generalization",
+  "train_dataset": "Friday (CIC-IDS2017: PortScan + DDoS LOIC)",
+  "test_dataset": "Tuesday (CIC-IDS2017: FTP-Patator + SSH-Patator)",
+  "model_architecture": "Model A (12 Zero-DPI Temporal Features)",
+  "evaluation_results": {
+    "0.035": {
+      "threshold": 0.035,
+      "tp": 2962,
+      "fp": 1585,
+      "tn": 8415,
+      "fn": 10870,
+      "accuracy": 47.74,
+      "precision": 65.14,
+      "recall": 21.41,
+      "f1_score": 32.23,
+      "roc_auc": 43.01
+    },
+    "0.1": {
+      "threshold": 0.1,
+      "tp": 2914,
+      "fp": 1275,
+      "tn": 8725,
+      "fn": 10918,
+      "accuracy": 48.84,
+      "precision": 69.56,
+      "recall": 21.07,
+      "f1_score": 32.34,
+      "roc_auc": 43.01
+    },
+    "0.3": {
+      "threshold": 0.3,
+      "tp": 2902,
+      "fp": 1063,
+      "tn": 8937,
+      "fn": 10930,
+      "accuracy": 49.68,
+      "precision": 73.19,
+      "recall": 20.98,
+      "f1_score": 32.61,
+      "roc_auc": 43.01
+    },
+    "0.5": {
+      "threshold": 0.5,
+      "tp": 2865,
+      "fp": 934,
+      "tn": 9066,
+      "fn": 10967,
+      "accuracy": 50.06,
+      "precision": 75.41,
+      "recall": 20.71,
+      "f1_score": 32.5,
+      "roc_auc": 43.01
+    }
+  }
+}

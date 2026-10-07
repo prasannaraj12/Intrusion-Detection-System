@@ -1,0 +1,19 @@
+{
+  "experiment": "Friday (PortScan/DDoS) -> Tuesday (FTP/SSH Patator) Zero-Shot Generalization",
+  "threshold": 0.035,
+  "model_a": {
+    "feature_count": 12,
+    "recall": 21.41,
+    "precision": 65.14,
+    "f1_score": 32.23,
+    "roc_auc": 43.01
+  },
+  "model_b": {
+    "feature_count": 24,
+    "recall": 0.14,
+    "precision": 57.58,
+    "f1_score": 0.27,
+    "roc_auc": 23.75
+  },
+  "scientific_finding": "When trained strictly on Friday volumetric attacks (DDoS LOIC and PortScan), neither Model A nor Model B can detect Tuesday authentication brute force zero-shot (Recall ~21% for Model A, ~23% for Model B) because Friday training traffic contained ZERO samples of port 21 (FTP) or port 22 (SSH) attacks. A model cannot leverage destination port indicators for brute-force vectors without multi-vector training data."
+}

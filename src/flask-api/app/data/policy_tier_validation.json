@@ -1,0 +1,118 @@
+[
+  {
+    "name": "Configuration 1 (Legacy Default)",
+    "threshold_monitor": 0.035,
+    "threshold_quarantine": 0.7,
+    "allow_tier": {
+      "total": 7738,
+      "benign": 7479,
+      "escaped_attacks": 259,
+      "benign_purity_pct": 96.65
+    },
+    "monitor_tier": {
+      "total": 5821,
+      "benign_watchlist": 2398,
+      "flagged_attacks": 3423,
+      "attack_precision_pct": 58.8
+    },
+    "quarantine_tier": {
+      "total": 6441,
+      "false_quarantines": 123,
+      "true_quarantines": 6318,
+      "quarantine_precision_pct": 98.09,
+      "attack_coverage_pct": 63.18
+    },
+    "system_totals": {
+      "threat_interception_pct": 97.41,
+      "benign_forward_pct": 74.79,
+      "false_quarantine_rate_pct": 1.23
+    }
+  },
+  {
+    "name": "Configuration 2 (Noise Reduced)",
+    "threshold_monitor": 0.1,
+    "threshold_quarantine": 0.7,
+    "allow_tier": {
+      "total": 8837,
+      "benign": 8532,
+      "escaped_attacks": 305,
+      "benign_purity_pct": 96.55
+    },
+    "monitor_tier": {
+      "total": 4722,
+      "benign_watchlist": 1345,
+      "flagged_attacks": 3377,
+      "attack_precision_pct": 71.52
+    },
+    "quarantine_tier": {
+      "total": 6441,
+      "false_quarantines": 123,
+      "true_quarantines": 6318,
+      "quarantine_precision_pct": 98.09,
+      "attack_coverage_pct": 63.18
+    },
+    "system_totals": {
+      "threat_interception_pct": 96.95,
+      "benign_forward_pct": 85.32,
+      "false_quarantine_rate_pct": 1.23
+    }
+  },
+  {
+    "name": "Configuration 3 (Balanced Operational - RECOMMENDED)",
+    "threshold_monitor": 0.2,
+    "threshold_quarantine": 0.75,
+    "allow_tier": {
+      "total": 9294,
+      "benign": 8963,
+      "escaped_attacks": 331,
+      "benign_purity_pct": 96.44
+    },
+    "monitor_tier": {
+      "total": 4855,
+      "benign_watchlist": 971,
+      "flagged_attacks": 3884,
+      "attack_precision_pct": 80.0
+    },
+    "quarantine_tier": {
+      "total": 5851,
+      "false_quarantines": 66,
+      "true_quarantines": 5785,
+      "quarantine_precision_pct": 98.87,
+      "attack_coverage_pct": 57.85
+    },
+    "system_totals": {
+      "threat_interception_pct": 96.69,
+      "benign_forward_pct": 89.63,
+      "false_quarantine_rate_pct": 0.66
+    }
+  },
+  {
+    "name": "Configuration 4 (Strict Quarantine)",
+    "threshold_monitor": 0.3,
+    "threshold_quarantine": 0.8,
+    "allow_tier": {
+      "total": 9457,
+      "benign": 9079,
+      "escaped_attacks": 378,
+      "benign_purity_pct": 96.0
+    },
+    "monitor_tier": {
+      "total": 5556,
+      "benign_watchlist": 894,
+      "flagged_attacks": 4662,
+      "attack_precision_pct": 83.91
+    },
+    "quarantine_tier": {
+      "total": 4987,
+      "false_quarantines": 27,
+      "true_quarantines": 4960,
+      "quarantine_precision_pct": 99.46,
+      "attack_coverage_pct": 49.6
+    },
+    "system_totals": {
+      "threat_interception_pct": 96.22,
+      "benign_forward_pct": 90.79,
+      "false_quarantine_rate_pct": 0.27
+    }
+  }
+]

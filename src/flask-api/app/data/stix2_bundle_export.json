@@ -1,0 +1,141 @@
+{
+  "type": "bundle",
+  "id": "bundle--aa47751b-d43f-4dbf-9911-b9bce906fcd9",
+  "objects": [
+    {
+      "type": "identity",
+      "spec_version": "2.1",
+      "id": "identity--eae0e15f-42a6-4015-b2c9-01a0b222dbac",
+      "created": "2026-10-07T14:17:07.612966Z",
+      "modified": "2026-10-07T14:17:07.612966Z",
+      "name": "AegisNIDS Autonomous Defense Sensor",
+      "description": "Zero-DPI Temporal Intrusion Detection & Decoy Quarantine Platform",
+      "identity_class": "system"
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--31613fff-55b0-47ba-ae6a-906b793e5727",
+      "created": "2026-10-07T14:17:07.612966Z",
+      "modified": "2026-10-07T14:17:07.612966Z",
+      "name": "DDOS_SYN_FLOOD Indicator (IOC-005)",
+      "description": "Extracted from Layer 2 Quarantine Decoy. Attacker IP: 192.0.2.77. Target Port: 80. Severity: HIGH. MITRE ATT&CK: T1498.001.",
+      "indicator_types": [
+        "malicious-activity",
+        "anomalous-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '192.0.2.77']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-07T14:17:07.612966Z",
+      "confidence": 74,
+      "created_by_ref": "identity--eae0e15f-42a6-4015-b2c9-01a0b222dbac",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1498.001"
+        }
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--9eec9f2b-3262-4a8e-aa30-0d157044932e",
+      "created": "2026-10-07T14:17:07.612966Z",
+      "modified": "2026-10-07T14:17:07.612966Z",
+      "name": "DDOS_SYN_FLOOD Indicator (IOC-001)",
+      "description": "Extracted from Layer 2 Quarantine Decoy. Attacker IP: 203.0.113.42. Target Port: 80. Severity: CRITICAL. MITRE ATT&CK: T1498.001.",
+      "indicator_types": [
+        "malicious-activity",
+        "anomalous-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '203.0.113.42']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-07T14:17:07.612966Z",
+      "confidence": 98,
+      "created_by_ref": "identity--eae0e15f-42a6-4015-b2c9-01a0b222dbac",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1498.001"
+        }
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--74fa2543-e22b-4c34-a1e0-2e499a2030b7",
+      "created": "2026-10-07T14:17:07.612966Z",
+      "modified": "2026-10-07T14:17:07.612966Z",
+      "name": "SSH_BRUTE_FORCE Indicator (IOC-002)",
+      "description": "Extracted from Layer 2 Quarantine Decoy. Attacker IP: 198.51.100.18. Target Port: 22. Severity: HIGH. MITRE ATT&CK: T1110.",
+      "indicator_types": [
+        "malicious-activity",
+        "anomalous-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '198.51.100.18']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-07T14:17:07.612966Z",
+      "confidence": 94,
+      "created_by_ref": "identity--eae0e15f-42a6-4015-b2c9-01a0b222dbac",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1110"
+        }
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--b2dad132-0d36-43f4-958b-d289a5a7be20",
+      "created": "2026-10-07T14:17:07.612966Z",
+      "modified": "2026-10-07T14:17:07.612966Z",
+      "name": "RECON_PORT_SCAN Indicator (IOC-003)",
+      "description": "Extracted from Layer 2 Quarantine Decoy. Attacker IP: 45.143.201.12. Target Port: 8080. Severity: MEDIUM. MITRE ATT&CK: T1046.",
+      "indicator_types": [
+        "malicious-activity",
+        "anomalous-activity"
+      ],
+      "pattern": "[ipv4-addr:value = '45.143.201.12']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-07T14:17:07.612966Z",
+      "confidence": 88,
+      "created_by_ref": "identity--eae0e15f-42a6-4015-b2c9-01a0b222dbac",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1046"
+        }
+      ]
+    },
+    {
+      "type": "indicator",
+      "spec_version": "2.1",
+      "id": "indicator--63fabbf1-521d-40be-b103-816d6723e11d",
+      "created": "2026-10-07T14:17:07.612966Z",
+      "modified": "2026-10-07T14:17:07.612966Z",
+      "name": "MALICIOUS_DROPPER Indicator (IOC-004)",
+      "description": "Extracted from Layer 2 Quarantine Decoy. Attacker IP: e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855. Target Port: 22. Severity: CRITICAL. MITRE ATT&CK: T1059.004.",
+      "indicator_types": [
+        "malicious-activity",
+        "anomalous-activity"
+      ],
+      "pattern": "[file:hashes.'SHA-256' = 'e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855']",
+      "pattern_type": "stix",
+      "pattern_version": "2.1",
+      "valid_from": "2026-10-07T14:17:07.612966Z",
+      "confidence": 100,
+      "created_by_ref": "identity--eae0e15f-42a6-4015-b2c9-01a0b222dbac",
+      "external_references": [
+        {
+          "source_name": "mitre-attack",
+          "external_id": "T1059.004"
+        }
+      ]
+    }
+  ]
+}

@@ -3,16 +3,19 @@ version: '3.8'
 services:
   api:
     build: .
-    container_name: network-ids-api
+    container_name: aegis-nids-api
     restart: unless-stopped
     ports:
       - "5000:5000"
     volumes:
-      - ./app:/app/app  
-      - ./models:/app/app/models 
+      - ./app/data:/app/app/data
     environment:
       - FLASK_APP=run.py
       - FLASK_ENV=production
-      - MODEL_PATH=/app/app/models/model.pkl
-      - IDLE_THRESHOLD=500000
-      - PREDICTION_THRESHOLD=0.5
+      - MODEL_PATH=app/models/model.pkl
+      - IDLE_THRESHOLD=5000000
+      - PREDICTION_THRESHOLD=0.035
+    security_opt:
+      - no-new-privileges:true
+    cap_drop:
+      - ALL

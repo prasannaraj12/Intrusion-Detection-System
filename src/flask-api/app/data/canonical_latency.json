@@ -1,0 +1,37 @@
+{
+  "methodology": "warm_canonical_benchmark_3x240_flows",
+  "methodology_description": "Standardized warm-start benchmark over 240 evaluation flows with 3 repetitions (720 total measurements per stage), measuring feature extraction, DataFrame preparation, model inference, and total ML pipeline using time.perf_counter() under GC control.",
+  "evaluated_flows": 240,
+  "repetitions": 3,
+  "warmup_flows": 30,
+  "total_measurements_per_stage": 720,
+  "timestamp": "2026-10-07T06:52:42Z",
+  "feature_extraction_ms": {
+    "median": 0.2,
+    "p95": 0.31,
+    "min": 0.12,
+    "max": 0.41,
+    "mean": 0.21
+  },
+  "dataframe_preparation_ms": {
+    "median": 0.55,
+    "p95": 0.91,
+    "min": 0.34,
+    "max": 1.39,
+    "mean": 0.6
+  },
+  "model_inference_ms": {
+    "median": 1.21,
+    "p95": 2.01,
+    "min": 0.75,
+    "max": 2.89,
+    "mean": 1.32
+  },
+  "total_detection_ms": {
+    "median": 1.98,
+    "p95": 3.16,
+    "min": 1.21,
+    "max": 4.1,
+    "mean": 2.13
+  }
+}

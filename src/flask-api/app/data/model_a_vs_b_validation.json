@@ -1,0 +1,28 @@
+{
+  "model_a": {
+    "feature_count": 12,
+    "accuracy": 89.26,
+    "precision": 79.28,
+    "recall": 99.83,
+    "f1_score": 88.37,
+    "roc_auc": 98.44,
+    "fpr": 18.05,
+    "fnr": 0.17,
+    "median_latency_ms": 1.154,
+    "ssh_recall": 99.72,
+    "ftp_recall": 99.91
+  },
+  "model_b": {
+    "feature_count": 24,
+    "accuracy": 99.88,
+    "precision": 99.71,
+    "recall": 100.0,
+    "f1_score": 99.86,
+    "roc_auc": 100.0,
+    "fpr": 0.2,
+    "fnr": 0.0,
+    "median_latency_ms": 1.171,
+    "ssh_recall": 100.0,
+    "ftp_recall": 100.0
+  }
+}

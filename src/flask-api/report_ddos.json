@@ -1,0 +1,75 @@
+{
+  "pcap_file": "sample_ddos.pcap",
+  "file_size_bytes": 3524,
+  "total_packets_parsed": 50,
+  "skipped_packets": 0,
+  "reconstructed_flows": 1,
+  "analyzed_flows": 1,
+  "attacks_flagged": 1,
+  "benign_flows": 0,
+  "quarantined_sessions_count": 0,
+  "processing_time_ms": 23.33,
+  "flows": [
+    {
+      "flow_id": "10.0.0.1:80<->203.0.113.42:55443_TCP",
+      "src_ip": "203.0.113.42",
+      "dst_ip": "10.0.0.1",
+      "src_port": 55443,
+      "dst_port": 80,
+      "proto": "TCP",
+      "packet_count": 50,
+      "flow_duration_us": 24689.0,
+      "attack_probability": 0.4359,
+      "risk_score": 43.6,
+      "risk_level": "MEDIUM",
+      "policy": "MONITOR",
+      "policy_action": "FLAG_FOR_ANALYST_REVIEW",
+      "attack_category": "DDOS_SYN_FLOOD",
+      "mitre_ttp": "T1498.001 - Network Denial of Service: Direct Flood",
+      "shap_explanation": "Flagged primarily due to abnormal Bwd IAT Max (+1.1608) and elevated Fwd IAT Mean (+0.714)",
+      "top_drivers": [
+        {
+          "feature": "Bwd IAT Max",
+          "shap_value": 1.1608,
+          "feature_value": 0.0,
+          "direction": "ATTACK",
+          "impact": 1.1608
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.714,
+          "feature_value": 503.86,
+          "direction": "ATTACK",
+          "impact": 0.714
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.5576,
+          "feature_value": 201.05,
+          "direction": "BENIGN",
+          "impact": 0.5576
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 201.04796868977738,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 201.04796868977738,
+        "Fwd IAT Max": 839.0,
+        "Flow IAT Mean": 503.85714285714283,
+        "Flow IAT Max": 839.0,
+        "Fwd IAT Mean": 503.85714285714283,
+        "Fwd IAT Total": 24689.0,
+        "Flow Duration": 24689.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.582,
+        "model_inference": 7.122,
+        "total": 7.704
+      }
+    }
+  ]
+}

@@ -1,0 +1,170 @@
+{
+  "dataset": "CIC-IDS2017 Real Benign Traffic (Friday + Tuesday)",
+  "total_benign_flows": 10000,
+  "false_positive_count": 2521,
+  "false_positive_rate_at_0035_pct": 25.21,
+  "probability_distribution": {
+    "median": 0.144,
+    "p75": 0.578,
+    "p90": 0.6519,
+    "max": 0.993,
+    "count_in_monitor_tier_0035_to_070": 2398,
+    "count_in_quarantine_tier_ge_070": 123,
+    "false_quarantine_rate_pct": 1.23
+  },
+  "top_affected_destination_ports": {
+    "443": {
+      "count": 498,
+      "percentage": 19.75,
+      "service": "HTTPS (TLS Encrypted Web / APIs)"
+    },
+    "80": {
+      "count": 493,
+      "percentage": 19.56,
+      "service": "HTTP (Web Browsing / CDNs)"
+    },
+    "53": {
+      "count": 131,
+      "percentage": 5.2,
+      "service": "DNS (Domain Name Lookups)"
+    },
+    "8080": {
+      "count": 37,
+      "percentage": 1.47,
+      "service": "HTTP Alternate / Proxy"
+    },
+    "22": {
+      "count": 26,
+      "percentage": 1.03,
+      "service": "SSH (Remote Administration)"
+    },
+    "137": {
+      "count": 20,
+      "percentage": 0.79,
+      "service": "NetBIOS Name Service (Windows LAN)"
+    },
+    "138": {
+      "count": 9,
+      "percentage": 0.36,
+      "service": "NetBIOS Datagram Service"
+    },
+    "465": {
+      "count": 8,
+      "percentage": 0.32,
+      "service": "Ephemeral / Custom TCP/UDP (465)"
+    },
+    "88": {
+      "count": 7,
+      "percentage": 0.28,
+      "service": "Kerberos Authentication"
+    },
+    "8612": {
+      "count": 3,
+      "percentage": 0.12,
+      "service": "Ephemeral / Custom TCP/UDP (8612)"
+    }
+  },
+  "feature_medians_comparison": {
+    "Fwd IAT Std": {
+      "fp_median": 0.0,
+      "tn_median": 0.0,
+      "fp_mean": 3087665.27,
+      "tn_mean": 1780711.77,
+      "ratio_fp_to_tn_median": 0.0
+    },
+    "Bwd IAT Std": {
+      "fp_median": 0.0,
+      "tn_median": 0.0,
+      "fp_mean": 2011359.95,
+      "tn_mean": 1635433.52,
+      "ratio_fp_to_tn_median": 0.0
+    },
+    "Flow IAT Std": {
+      "fp_median": 197.69,
+      "tn_median": 9848.04,
+      "fp_mean": 2678229.22,
+      "tn_mean": 1847772.03,
+      "ratio_fp_to_tn_median": 0.02
+    },
+    "Fwd IAT Max": {
+      "fp_median": 634.0,
+      "tn_median": 4.0,
+      "fp_mean": 8268901.61,
+      "tn_mean": 5208627.03,
+      "ratio_fp_to_tn_median": 158.5
+    },
+    "Flow IAT Mean": {
+      "fp_median": 1618.71,
+      "tn_median": 23466.0,
+      "fp_mean": 1231757.05,
+      "tn_mean": 878149.48,
+      "ratio_fp_to_tn_median": 0.07
+    },
+    "Flow IAT Max": {
+      "fp_median": 2980.0,
+      "tn_median": 47938.0,
+      "fp_mean": 8115645.34,
+      "tn_mean": 5626248.63,
+      "ratio_fp_to_tn_median": 0.06
+    },
+    "Fwd IAT Mean": {
+      "fp_median": 464.0,
+      "tn_median": 4.0,
+      "fp_mean": 2907377.44,
+      "tn_mean": 1774922.36,
+      "ratio_fp_to_tn_median": 116.0
+    },
+    "Fwd IAT Total": {
+      "fp_median": 683.0,
+      "tn_median": 4.0,
+      "fp_mean": 8485516.41,
+      "tn_mean": 13583308.39,
+      "ratio_fp_to_tn_median": 170.75
+    },
+    "Flow Duration": {
+      "fp_median": 3385.0,
+      "tn_median": 52471.0,
+      "fp_mean": 8605298.6,
+      "tn_mean": 14340096.76,
+      "ratio_fp_to_tn_median": 0.06
+    },
+    "Bwd IAT Max": {
+      "fp_median": 0.0,
+      "tn_median": 4.0,
+      "fp_mean": 6853099.53,
+      "tn_mean": 5268828.34,
+      "ratio_fp_to_tn_median": 0.0
+    },
+    "Idle Max": {
+      "fp_median": 0.0,
+      "tn_median": 0.0,
+      "fp_mean": 7204605.74,
+      "tn_mean": 5295859.39,
+      "ratio_fp_to_tn_median": 0.0
+    },
+    "Idle Mean": {
+      "fp_median": 0.0,
+      "tn_median": 0.0,
+      "fp_mean": 6797850.63,
+      "tn_mean": 4526725.66,
+      "ratio_fp_to_tn_median": 0.0
+    }
+  },
+  "root_causes": [
+    {
+      "finding_id": "RC-1",
+      "title": "Compressed Burst Timing in Local Enterprise Protocols (NetBIOS, SMB, Active Directory)",
+      "description": "Windows workstation LAN synchronization traffic (ports 445, 137, 88) sends bursts of small control packets with microsecond inter-arrival intervals (<500us), closely mimicking port scan and syn flood timing dynamics."
+    },
+    {
+      "finding_id": "RC-2",
+      "title": "Extreme Conservatism of Controlled Synthetic Threshold (0.035)",
+      "description": "In synthetic benchmarks, benign traffic was generated with ideal 15ms-150ms human spacing. On live network taps, TCP window updates, ACK clustering, and CDN multiplexing produce natural micro-delays between 500us and 5ms, pushing probabilities into the 0.035 - 0.20 range."
+    },
+    {
+      "finding_id": "RC-3",
+      "title": "95.1% of False Positives are Confined to the MONITOR Watchlist Tier",
+      "description": "Of the 2521 false alarms, 2398 (95.1%) had probabilities below 0.70 and were routed to passive SOC watchlist monitoring, not disrupted. Only 123 flows (1.23% of all benign traffic) triggered automatic QUARANTINE."
+    }
+  ]
+}

@@ -1,0 +1,929 @@
+{
+  "pcap_file": "sample_mixed.pcap",
+  "file_size_bytes": 6370,
+  "total_packets_parsed": 91,
+  "skipped_packets": 0,
+  "reconstructed_flows": 15,
+  "analyzed_flows": 15,
+  "attacks_flagged": 13,
+  "benign_flows": 2,
+  "quarantined_sessions_count": 0,
+  "processing_time_ms": 134.36,
+  "flows": [
+    {
+      "flow_id": "192.168.1.105:54321<->8.8.8.8:53_UDP",
+      "src_ip": "192.168.1.105",
+      "dst_ip": "8.8.8.8",
+      "src_port": 54321,
+      "dst_port": 53,
+      "proto": "UDP",
+      "packet_count": 2,
+      "flow_duration_us": 24000.0,
+      "attack_probability": 0.0021,
+      "risk_score": 0.2,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Max (+0.3851) and elevated Fwd IAT Total (+0.0282)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -1.0266,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 1.0266
+        },
+        {
+          "feature": "Flow IAT Mean",
+          "shap_value": -0.8621,
+          "feature_value": 24000.0,
+          "direction": "BENIGN",
+          "impact": 0.8621
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": -0.7966,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.7966
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 0.0,
+        "Flow IAT Mean": 24000.0,
+        "Flow IAT Max": 24000.0,
+        "Fwd IAT Mean": 0.0,
+        "Fwd IAT Total": 0.0,
+        "Flow Duration": 24000.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.084,
+        "model_inference": 5.351,
+        "total": 5.435
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:80<->203.0.113.42:55443_TCP",
+      "src_ip": "203.0.113.42",
+      "dst_ip": "10.0.0.1",
+      "src_port": 55443,
+      "dst_port": 80,
+      "proto": "TCP",
+      "packet_count": 50,
+      "flow_duration_us": 24689.0,
+      "attack_probability": 0.4359,
+      "risk_score": 43.6,
+      "risk_level": "MEDIUM",
+      "policy": "MONITOR",
+      "policy_action": "FLAG_FOR_ANALYST_REVIEW",
+      "attack_category": "DDOS_SYN_FLOOD",
+      "mitre_ttp": "T1498.001 - Network Denial of Service: Direct Flood",
+      "shap_explanation": "Flagged primarily due to abnormal Bwd IAT Max (+1.1608) and elevated Fwd IAT Mean (+0.714)",
+      "top_drivers": [
+        {
+          "feature": "Bwd IAT Max",
+          "shap_value": 1.1608,
+          "feature_value": 0.0,
+          "direction": "ATTACK",
+          "impact": 1.1608
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.714,
+          "feature_value": 503.86,
+          "direction": "ATTACK",
+          "impact": 0.714
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.5576,
+          "feature_value": 201.05,
+          "direction": "BENIGN",
+          "impact": 0.5576
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 201.04796868977738,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 201.04796868977738,
+        "Fwd IAT Max": 839.0,
+        "Flow IAT Mean": 503.85714285714283,
+        "Flow IAT Max": 839.0,
+        "Fwd IAT Mean": 503.85714285714283,
+        "Fwd IAT Total": 24689.0,
+        "Flow Duration": 24689.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.431,
+        "model_inference": 4.898,
+        "total": 5.329
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:21<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 21,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 721.0,
+      "attack_probability": 0.1856,
+      "risk_score": 18.6,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+1.0851) and elevated Fwd IAT Mean (+0.756)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 1.0851,
+          "feature_value": 721.0,
+          "direction": "ATTACK",
+          "impact": 1.0851
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.756,
+          "feature_value": 721.0,
+          "direction": "ATTACK",
+          "impact": 0.756
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.7318,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.7318
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 721.0,
+        "Flow IAT Mean": 721.0,
+        "Flow IAT Max": 721.0,
+        "Fwd IAT Mean": 721.0,
+        "Fwd IAT Total": 721.0,
+        "Flow Duration": 721.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.076,
+        "model_inference": 3.704,
+        "total": 3.78
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:22<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 22,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 2171.0,
+      "attack_probability": 0.0845,
+      "risk_score": 8.4,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.9187) and elevated Fwd IAT Mean (+0.6003)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.9187,
+          "feature_value": 2171.0,
+          "direction": "ATTACK",
+          "impact": 0.9187
+        },
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8405,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8405
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.6275,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.6275
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 2171.0,
+        "Flow IAT Mean": 2171.0,
+        "Flow IAT Max": 2171.0,
+        "Fwd IAT Mean": 2171.0,
+        "Fwd IAT Total": 2171.0,
+        "Flow Duration": 2171.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.118,
+        "model_inference": 4.459,
+        "total": 4.577
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:23<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 23,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1318.0,
+      "attack_probability": 0.0741,
+      "risk_score": 7.4,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.8228) and elevated Fwd IAT Mean (+0.7396)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8481,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8481
+        },
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.8228,
+          "feature_value": 1318.0,
+          "direction": "ATTACK",
+          "impact": 0.8228
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.7396,
+          "feature_value": 1318.0,
+          "direction": "ATTACK",
+          "impact": 0.7396
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1318.0,
+        "Flow IAT Mean": 1318.0,
+        "Flow IAT Max": 1318.0,
+        "Fwd IAT Mean": 1318.0,
+        "Fwd IAT Total": 1318.0,
+        "Flow Duration": 1318.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.09,
+        "model_inference": 4.169,
+        "total": 4.259
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:25<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 25,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1702.0,
+      "attack_probability": 0.0652,
+      "risk_score": 6.5,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.8316) and elevated Fwd IAT Mean (+0.6599)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8581,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8581
+        },
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.8316,
+          "feature_value": 1702.0,
+          "direction": "ATTACK",
+          "impact": 0.8316
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.6599,
+          "feature_value": 1702.0,
+          "direction": "ATTACK",
+          "impact": 0.6599
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1702.0,
+        "Flow IAT Mean": 1702.0,
+        "Flow IAT Max": 1702.0,
+        "Fwd IAT Mean": 1702.0,
+        "Fwd IAT Total": 1702.0,
+        "Flow Duration": 1702.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.107,
+        "model_inference": 4.56,
+        "total": 4.667
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:53<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 53,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 2176.0,
+      "attack_probability": 0.0845,
+      "risk_score": 8.4,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.9187) and elevated Fwd IAT Mean (+0.6003)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.9187,
+          "feature_value": 2176.0,
+          "direction": "ATTACK",
+          "impact": 0.9187
+        },
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8405,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8405
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.6275,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.6275
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 2176.0,
+        "Flow IAT Mean": 2176.0,
+        "Flow IAT Max": 2176.0,
+        "Fwd IAT Mean": 2176.0,
+        "Fwd IAT Total": 2176.0,
+        "Flow Duration": 2176.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.082,
+        "model_inference": 3.88,
+        "total": 3.962
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:80<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 80,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1927.0,
+      "attack_probability": 0.115,
+      "risk_score": 11.5,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.9653) and elevated Fwd IAT Mean (+0.5676)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.9653,
+          "feature_value": 1927.0,
+          "direction": "ATTACK",
+          "impact": 0.9653
+        },
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8294,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8294
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.6273,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.6273
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1927.0,
+        "Flow IAT Mean": 1927.0,
+        "Flow IAT Max": 1927.0,
+        "Fwd IAT Mean": 1927.0,
+        "Fwd IAT Total": 1927.0,
+        "Flow Duration": 1927.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.119,
+        "model_inference": 4.717,
+        "total": 4.836
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:110<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 110,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1707.0,
+      "attack_probability": 0.0652,
+      "risk_score": 6.5,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.8316) and elevated Fwd IAT Mean (+0.6599)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8581,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8581
+        },
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.8316,
+          "feature_value": 1707.0,
+          "direction": "ATTACK",
+          "impact": 0.8316
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.6599,
+          "feature_value": 1707.0,
+          "direction": "ATTACK",
+          "impact": 0.6599
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1707.0,
+        "Flow IAT Mean": 1707.0,
+        "Flow IAT Max": 1707.0,
+        "Fwd IAT Mean": 1707.0,
+        "Fwd IAT Total": 1707.0,
+        "Flow Duration": 1707.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.084,
+        "model_inference": 3.435,
+        "total": 3.519
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:143<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 143,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1639.0,
+      "attack_probability": 0.0652,
+      "risk_score": 6.5,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.8316) and elevated Fwd IAT Mean (+0.6599)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8581,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8581
+        },
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.8316,
+          "feature_value": 1639.0,
+          "direction": "ATTACK",
+          "impact": 0.8316
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.6599,
+          "feature_value": 1639.0,
+          "direction": "ATTACK",
+          "impact": 0.6599
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1639.0,
+        "Flow IAT Mean": 1639.0,
+        "Flow IAT Max": 1639.0,
+        "Fwd IAT Mean": 1639.0,
+        "Fwd IAT Total": 1639.0,
+        "Flow Duration": 1639.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.102,
+        "model_inference": 3.956,
+        "total": 4.058
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:443<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 443,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 2332.0,
+      "attack_probability": 0.0845,
+      "risk_score": 8.4,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.9187) and elevated Fwd IAT Mean (+0.6003)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.9187,
+          "feature_value": 2332.0,
+          "direction": "ATTACK",
+          "impact": 0.9187
+        },
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8405,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8405
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.6275,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.6275
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 2332.0,
+        "Flow IAT Mean": 2332.0,
+        "Flow IAT Max": 2332.0,
+        "Fwd IAT Mean": 2332.0,
+        "Fwd IAT Total": 2332.0,
+        "Flow Duration": 2332.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.074,
+        "model_inference": 3.294,
+        "total": 3.368
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:3306<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 3306,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 2314.0,
+      "attack_probability": 0.0845,
+      "risk_score": 8.4,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.9187) and elevated Fwd IAT Mean (+0.6003)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.9187,
+          "feature_value": 2314.0,
+          "direction": "ATTACK",
+          "impact": 0.9187
+        },
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8405,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8405
+        },
+        {
+          "feature": "Flow IAT Std",
+          "shap_value": -0.6275,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.6275
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 2314.0,
+        "Flow IAT Mean": 2314.0,
+        "Flow IAT Max": 2314.0,
+        "Fwd IAT Mean": 2314.0,
+        "Fwd IAT Total": 2314.0,
+        "Flow Duration": 2314.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.102,
+        "model_inference": 4.467,
+        "total": 4.569
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:3389<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 3389,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1770.0,
+      "attack_probability": 0.0652,
+      "risk_score": 6.5,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.8299) and elevated Fwd IAT Mean (+0.6583)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.854,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.854
+        },
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.8299,
+          "feature_value": 1770.0,
+          "direction": "ATTACK",
+          "impact": 0.8299
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.6583,
+          "feature_value": 1770.0,
+          "direction": "ATTACK",
+          "impact": 0.6583
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1770.0,
+        "Flow IAT Mean": 1770.0,
+        "Flow IAT Max": 1770.0,
+        "Fwd IAT Mean": 1770.0,
+        "Fwd IAT Total": 1770.0,
+        "Flow Duration": 1770.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.101,
+        "model_inference": 3.939,
+        "total": 4.04
+      }
+    },
+    {
+      "flow_id": "192.168.1.105:54321<->93.184.216.34:443_TCP",
+      "src_ip": "192.168.1.105",
+      "dst_ip": "93.184.216.34",
+      "src_port": 54321,
+      "dst_port": 443,
+      "proto": "TCP",
+      "packet_count": 15,
+      "flow_duration_us": 738474.0,
+      "attack_probability": 0.0085,
+      "risk_score": 0.9,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Mean (+0.3649) and elevated Bwd IAT Max (+0.1534)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": -1.4421,
+          "feature_value": 689870.0,
+          "direction": "BENIGN",
+          "impact": 1.4421
+        },
+        {
+          "feature": "Flow IAT Mean",
+          "shap_value": -0.7223,
+          "feature_value": 52748.14,
+          "direction": "BENIGN",
+          "impact": 0.7223
+        },
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.51,
+          "feature_value": 47144.6,
+          "direction": "BENIGN",
+          "impact": 0.51
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 47144.59511947888,
+        "Bwd IAT Std": 26023.902190529043,
+        "Flow IAT Std": 22460.97549674337,
+        "Fwd IAT Max": 172660.0,
+        "Flow IAT Mean": 52748.142857142855,
+        "Flow IAT Max": 87607.0,
+        "Fwd IAT Mean": 98552.85714285714,
+        "Fwd IAT Total": 689870.0,
+        "Flow Duration": 738474.0,
+        "Bwd IAT Max": 159927.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.295,
+        "model_inference": 4.35,
+        "total": 4.645
+      }
+    },
+    {
+      "flow_id": "10.0.0.1:8080<->198.51.100.88:49152_TCP",
+      "src_ip": "198.51.100.88",
+      "dst_ip": "10.0.0.1",
+      "src_port": 49152,
+      "dst_port": 8080,
+      "proto": "TCP",
+      "packet_count": 2,
+      "flow_duration_us": 1722.0,
+      "attack_probability": 0.0652,
+      "risk_score": 6.5,
+      "risk_level": "LOW",
+      "policy": "ALLOW",
+      "policy_action": "FORWARD_TO_INTERNAL_NETWORK",
+      "attack_category": "BENIGN",
+      "mitre_ttp": "N/A",
+      "shap_explanation": "Flagged primarily due to abnormal Fwd IAT Total (+0.8316) and elevated Fwd IAT Mean (+0.6599)",
+      "top_drivers": [
+        {
+          "feature": "Fwd IAT Std",
+          "shap_value": -0.8581,
+          "feature_value": 0.0,
+          "direction": "BENIGN",
+          "impact": 0.8581
+        },
+        {
+          "feature": "Fwd IAT Total",
+          "shap_value": 0.8316,
+          "feature_value": 1722.0,
+          "direction": "ATTACK",
+          "impact": 0.8316
+        },
+        {
+          "feature": "Fwd IAT Mean",
+          "shap_value": 0.6599,
+          "feature_value": 1722.0,
+          "direction": "ATTACK",
+          "impact": 0.6599
+        }
+      ],
+      "features": {
+        "Fwd IAT Std": 0.0,
+        "Bwd IAT Std": 0.0,
+        "Flow IAT Std": 0.0,
+        "Fwd IAT Max": 1722.0,
+        "Flow IAT Mean": 1722.0,
+        "Flow IAT Max": 1722.0,
+        "Fwd IAT Mean": 1722.0,
+        "Fwd IAT Total": 1722.0,
+        "Flow Duration": 1722.0,
+        "Bwd IAT Max": 0.0,
+        "Idle Max": 0.0,
+        "Idle Mean": 0.0
+      },
+      "honeypot_session": null,
+      "timing_ms": {
+        "feature_extraction": 0.074,
+        "model_inference": 3.286,
+        "total": 3.36
+      }
+    }
+  ]
+}

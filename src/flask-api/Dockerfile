@@ -1,32 +1,30 @@
-# Use Python 3.9 as the base image
-FROM python:3.9-slim
+# Python 3.11 Slim base for AegisNIDS Layer 1 Inference Service
+FROM python:3.11-slim
 
-# Set working directory
 WORKDIR /app
 
-# Set environment variables
 ENV PYTHONDONTWRITEBYTECODE=1 \
     PYTHONUNBUFFERED=1 \
     PIP_NO_CACHE_DIR=off \
     PIP_DISABLE_PIP_VERSION_CHECK=on
 
-# Install system dependencies (for LightGBM)
+# Install system dependencies (OpenMP for LightGBM, libpcap)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gcc libgomp1 \
+    gcc libgomp1 libpcap-dev \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements file
-COPY requirements.txt .
+# Hardening Phase 13: Non-root execution user
+RUN useradd -m -u 10001 aegisuser
 
-# Install Python dependencies
+COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy application code
 COPY . .
+RUN chown -R aegisuser:aegisuser /app
 
-# Expose the port the app runs on
+USER aegisuser
+
 EXPOSE 5000
 
-# Command to run the application
 CMD ["python", "run.py"]

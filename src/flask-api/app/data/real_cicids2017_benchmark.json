@@ -1,0 +1,233 @@
+{
+  "status": "VERIFIED_EMPIRICAL",
+  "dataset": "CIC-IDS2017 (Canadian Institute for Cybersecurity)",
+  "total_flows": 20000,
+  "benign_flows": 10000,
+  "attack_flows": 10000,
+  "model_evaluated": "Aegis-LGBM-v1.4 (12 Temporal Features)",
+  "threshold": 0.035,
+  "confusion_matrix": {
+    "tp": 9741,
+    "fp": 2521,
+    "tn": 7479,
+    "fn": 259
+  },
+  "metrics": {
+    "accuracy": 86.1,
+    "precision": 79.44,
+    "recall": 97.41,
+    "f1_score": 87.51,
+    "roc_auc": 97.17,
+    "fpr": 25.21,
+    "fnr": 2.59,
+    "inference_latency_ms": 0.001
+  },
+  "per_attack_categories": [
+    {
+      "category": "BENIGN",
+      "samples": 10000,
+      "detected": 7479,
+      "missed": 2521,
+      "metric_type": "Specificity",
+      "rate": 74.79,
+      "precision": 100.0,
+      "recall": 74.79,
+      "f1": 74.79,
+      "status": "VERIFIED_REAL_DATA"
+    },
+    {
+      "category": "PortScan",
+      "samples": 3500,
+      "detected": 3496,
+      "missed": 4,
+      "metric_type": "Recall",
+      "rate": 99.89,
+      "precision": 79.44,
+      "recall": 99.89,
+      "f1": 88.5,
+      "status": "VERIFIED_REAL_DATA"
+    },
+    {
+      "category": "DDoS",
+      "samples": 3500,
+      "detected": 3499,
+      "missed": 1,
+      "metric_type": "Recall",
+      "rate": 99.97,
+      "precision": 79.44,
+      "recall": 99.97,
+      "f1": 88.53,
+      "status": "VERIFIED_REAL_DATA"
+    },
+    {
+      "category": "SSH-Patator",
+      "samples": 1500,
+      "detected": 1495,
+      "missed": 5,
+      "metric_type": "Recall",
+      "rate": 99.67,
+      "precision": 79.44,
+      "recall": 99.67,
+      "f1": 88.41,
+      "status": "VERIFIED_REAL_DATA"
+    },
+    {
+      "category": "FTP-Patator",
+      "samples": 1500,
+      "detected": 1251,
+      "missed": 249,
+      "metric_type": "Recall",
+      "rate": 83.4,
+      "precision": 79.44,
+      "recall": 83.4,
+      "f1": 81.37,
+      "status": "VERIFIED_REAL_DATA"
+    }
+  ],
+  "threshold_sensitivity": [
+    {
+      "threshold": 0.01,
+      "precision": 72.43,
+      "recall": 97.98,
+      "f1": 83.29,
+      "fpr": 37.3,
+      "fnr": 2.02,
+      "tp": 9798,
+      "fp": 3730,
+      "tn": 6270,
+      "fn": 202
+    },
+    {
+      "threshold": 0.02,
+      "precision": 76.43,
+      "recall": 97.93,
+      "f1": 85.85,
+      "fpr": 30.2,
+      "fnr": 2.07,
+      "tp": 9793,
+      "fp": 3020,
+      "tn": 6980,
+      "fn": 207
+    },
+    {
+      "threshold": 0.035,
+      "precision": 79.44,
+      "recall": 97.41,
+      "f1": 87.51,
+      "fpr": 25.21,
+      "fnr": 2.59,
+      "tp": 9741,
+      "fp": 2521,
+      "tn": 7479,
+      "fn": 259
+    },
+    {
+      "threshold": 0.05,
+      "precision": 81.85,
+      "recall": 97.2,
+      "f1": 88.87,
+      "fpr": 21.55,
+      "fnr": 2.8,
+      "tp": 9720,
+      "fp": 2155,
+      "tn": 7845,
+      "fn": 280
+    },
+    {
+      "threshold": 0.1,
+      "precision": 86.85,
+      "recall": 96.95,
+      "f1": 91.62,
+      "fpr": 14.68,
+      "fnr": 3.05,
+      "tp": 9695,
+      "fp": 1468,
+      "tn": 8532,
+      "fn": 305
+    },
+    {
+      "threshold": 0.2,
+      "precision": 90.31,
+      "recall": 96.69,
+      "f1": 93.39,
+      "fpr": 10.37,
+      "fnr": 3.31,
+      "tp": 9669,
+      "fp": 1037,
+      "tn": 8963,
+      "fn": 331
+    },
+    {
+      "threshold": 0.3,
+      "precision": 91.26,
+      "recall": 96.22,
+      "f1": 93.68,
+      "fpr": 9.21,
+      "fnr": 3.78,
+      "tp": 9622,
+      "fp": 921,
+      "tn": 9079,
+      "fn": 378
+    },
+    {
+      "threshold": 0.5,
+      "precision": 92.9,
+      "recall": 92.42,
+      "f1": 92.66,
+      "fpr": 7.06,
+      "fnr": 7.58,
+      "tp": 9242,
+      "fp": 706,
+      "tn": 9294,
+      "fn": 758
+    },
+    {
+      "threshold": 0.7,
+      "precision": 98.09,
+      "recall": 63.18,
+      "f1": 76.86,
+      "fpr": 1.23,
+      "fnr": 36.82,
+      "tp": 6318,
+      "fp": 123,
+      "tn": 9877,
+      "fn": 3682
+    },
+    {
+      "threshold": 0.9,
+      "precision": 99.79,
+      "recall": 46.78,
+      "f1": 63.7,
+      "fpr": 0.1,
+      "fnr": 53.22,
+      "tp": 4678,
+      "fp": 10,
+      "tn": 9990,
+      "fn": 5322
+    }
+  ],
+  "model_b_comparison": {
+    "task": "Authentication Brute Force Detection (FTP/SSH Patator)",
+    "model_a": {
+      "features_count": 12,
+      "description": "Pure Temporal Inter-Arrival Features (Zero-DPI, Port-Agnostic)",
+      "precision": 79.99,
+      "recall": 99.69,
+      "f1": 88.76,
+      "ssh_recall": 99.8,
+      "ftp_recall": 82.41,
+      "limitation": "Misses 17.6% of slow FTP brute-force retries without target port 21"
+    },
+    "model_b": {
+      "features_count": 24,
+      "description": "12 Temporal + Destination Port + 6 TCP Flags + Packet/Byte Volume",
+      "precision": 99.69,
+      "recall": 99.98,
+      "f1": 99.83,
+      "ssh_recall": 100.0,
+      "ftp_recall": 99.98,
+      "benefit": "Fully resolves brute-force limitation; lifts F1 from 88.76% to 99.83%"
+    },
+    "delta_f1": 11.07
+  }
+}
