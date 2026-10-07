@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-10-07T15:28:13.193161",
+  "last_updated": "2026-10-07T15:38:14.123958",
   "sessions_count": 4,
   "iocs_count": 5,
   "sessions": [
@@ -20,7 +20,8 @@
         "Packet burst intercepted at 13:41:38 - Detained in sandbox",
         "Packet burst intercepted at 14:09:15 - Detained in sandbox",
         "Packet burst intercepted at 14:17:07 - Detained in sandbox",
-        "Packet burst intercepted at 15:28:13 - Detained in sandbox"
+        "Packet burst intercepted at 15:28:13 - Detained in sandbox",
+        "Packet burst intercepted at 15:38:14 - Detained in sandbox"
       ],
       "threat_intel": {
         "asn": "AS41217 Autonomous System",

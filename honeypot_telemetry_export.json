@@ -1,6 +1,6 @@
 {
   "metadata": {
-    "export_timestamp": "2026-10-07T15:28:13.260716Z",
+    "export_timestamp": "2026-10-07T15:38:14.157985Z",
     "generator": "AegisNIDS Layer 2 Autonomous Forensic Engine",
     "threat_defense_posture": "ELEVATED (DEFCON 2)",
     "quarantine_tier": "HIGH_RISK (Risk Score >= 70)",
@@ -19,7 +19,8 @@
         "Packet burst intercepted at 13:41:38 - Detained in sandbox",
         "Packet burst intercepted at 14:09:15 - Detained in sandbox",
         "Packet burst intercepted at 14:17:07 - Detained in sandbox",
-        "Packet burst intercepted at 15:28:13 - Detained in sandbox"
+        "Packet burst intercepted at 15:28:13 - Detained in sandbox",
+        "Packet burst intercepted at 15:38:14 - Detained in sandbox"
       ],
       "duration": "00:01:15",
       "mitre_ttp": "T1498.001 - Network Denial of Service: Direct Flood",
