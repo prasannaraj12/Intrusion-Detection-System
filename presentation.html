@@ -1,0 +1,1126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AegisNIDS — Final Defense Presentation</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;600&family=Inter:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #090d16;
+      --bg-surface: #111827;
+      --bg-card: rgba(17, 24, 39, 0.75);
+      --bg-card-hover: rgba(31, 41, 55, 0.85);
+      --border-subtle: rgba(255, 255, 255, 0.08);
+      --border-accent: rgba(59, 130, 246, 0.3);
+      --text-main: #f3f4f6;
+      --text-muted: #9ca3af;
+      --text-dim: #6b7280;
+      --cyan: #06b6d4;
+      --blue: #3b82f6;
+      --purple: #8b5cf6;
+      --emerald: #10b981;
+      --amber: #f59e0b;
+      --rose: #f43f5e;
+      --gradient-title: linear-gradient(135deg, #38bdf8 0%, #818cf8 50%, #c084fc 100%);
+      --gradient-accent: linear-gradient(135deg, #06b6d4 0%, #3b82f6 100%);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-main);
+      overflow: hidden;
+      height: 100vh;
+      width: 100vw;
+      display: flex;
+      flex-direction: column;
+      user-select: none;
+    }
+
+    /* Ambient background lighting */
+    .ambient-glow {
+      position: absolute;
+      width: 600px;
+      height: 600px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(59, 130, 246, 0.12) 0%, rgba(9, 13, 22, 0) 70%);
+      top: -150px;
+      right: -150px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .ambient-glow-2 {
+      position: absolute;
+      width: 500px;
+      height: 500px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(16, 185, 129, 0.08) 0%, rgba(9, 13, 22, 0) 70%);
+      bottom: -150px;
+      left: -150px;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    /* Top navigation header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 16px 36px;
+      border-bottom: 1px solid var(--border-subtle);
+      background: rgba(9, 13, 22, 0.85);
+      backdrop-filter: blur(16px);
+      z-index: 20;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .brand-badge {
+      background: var(--gradient-accent);
+      color: #fff;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 800;
+      font-size: 0.85rem;
+      letter-spacing: 1px;
+      padding: 4px 10px;
+      border-radius: 6px;
+      text-transform: uppercase;
+      box-shadow: 0 0 15px rgba(6, 182, 212, 0.4);
+    }
+
+    .brand-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      color: #fff;
+    }
+
+    .header-pills {
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    .status-pill {
+      font-size: 0.72rem;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 9999px;
+      background: rgba(16, 185, 129, 0.12);
+      color: var(--emerald);
+      border: 1px solid rgba(16, 185, 129, 0.3);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .status-pill::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--emerald);
+      box-shadow: 0 0 8px var(--emerald);
+    }
+
+    .header-actions {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .btn-icon {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      padding: 6px 14px;
+      border-radius: 8px;
+      font-size: 0.82rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .btn-icon:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: var(--border-accent);
+      transform: translateY(-1px);
+    }
+
+    /* Presentation viewport */
+    #deck-viewport {
+      flex: 1;
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 24px;
+      z-index: 10;
+    }
+
+    .slide {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      padding: 40px 60px;
+      opacity: 0;
+      visibility: hidden;
+      transform: scale(0.97) translateY(12px);
+      transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      overflow-y: auto;
+      box-sizing: border-box;
+    }
+
+    .slide.active {
+      opacity: 1;
+      visibility: visible;
+      transform: scale(1) translateY(0);
+    }
+
+    /* Slide Typography & Content */
+    .slide-num {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 2px;
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .slide-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 2.3rem;
+      font-weight: 800;
+      line-height: 1.15;
+      margin-bottom: 12px;
+      background: var(--gradient-title);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    .slide-subtitle {
+      font-size: 1.15rem;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+      max-width: 950px;
+      line-height: 1.5;
+    }
+
+    .highlight-quote {
+      background: linear-gradient(90deg, rgba(6, 182, 212, 0.12), rgba(59, 130, 246, 0.05));
+      border-left: 4px solid var(--cyan);
+      padding: 16px 20px;
+      border-radius: 0 10px 10px 0;
+      font-size: 1.1rem;
+      font-weight: 500;
+      line-height: 1.5;
+      color: #e2e8f0;
+      margin-bottom: 24px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    /* Grid layouts */
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      align-items: stretch;
+    }
+
+    .grid-3 {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    /* Cards */
+    .card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      padding: 22px;
+      backdrop-filter: blur(12px);
+      transition: all 0.25s ease;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .card:hover {
+      border-color: var(--border-accent);
+      background: var(--bg-card-hover);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.35);
+    }
+
+    .card-accent-cyan { border-top: 3px solid var(--cyan); }
+    .card-accent-emerald { border-top: 3px solid var(--emerald); }
+    .card-accent-purple { border-top: 3px solid var(--purple); }
+    .card-accent-amber { border-top: 3px solid var(--amber); }
+    .card-accent-rose { border-top: 3px solid var(--rose); }
+
+    .card-title {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .card-desc {
+      font-size: 0.92rem;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    .stat-box {
+      background: rgba(0, 0, 0, 0.25);
+      border-radius: 8px;
+      padding: 12px;
+      margin-top: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    .stat-val {
+      font-family: 'Outfit', sans-serif;
+      font-size: 1.7rem;
+      font-weight: 800;
+      color: var(--cyan);
+    }
+
+    .stat-label {
+      font-size: 0.76rem;
+      color: var(--text-dim);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* Data Table */
+    .data-table-container {
+      background: var(--bg-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: 12px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 0.88rem;
+    }
+
+    .data-table th {
+      background: rgba(255, 255, 255, 0.04);
+      padding: 12px 16px;
+      font-weight: 600;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border-subtle);
+      text-transform: uppercase;
+      font-size: 0.74rem;
+      letter-spacing: 0.8px;
+    }
+
+    .data-table td {
+      padding: 12px 16px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+      color: var(--text-main);
+    }
+
+    .data-table tr:hover td {
+      background: rgba(255, 255, 255, 0.02);
+    }
+
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 6px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      font-family: 'Fira Code', monospace;
+    }
+
+    .badge-green { background: rgba(16, 185, 129, 0.15); color: #34d399; }
+    .badge-cyan { background: rgba(6, 182, 212, 0.15); color: #38bdf8; }
+    .badge-purple { background: rgba(139, 92, 246, 0.15); color: #c084fc; }
+    .badge-amber { background: rgba(245, 158, 11, 0.15); color: #fbbf24; }
+    .badge-rose { background: rgba(244, 63, 94, 0.15); color: #fb7185; }
+
+    /* Code & Architecture Block */
+    .arch-code {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.82rem;
+      background: #080c14;
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 18px;
+      line-height: 1.5;
+      color: #93c5fd;
+      overflow-x: auto;
+    }
+
+    /* Embedded image card */
+    .chart-container {
+      background: rgba(0, 0, 0, 0.3);
+      border: 1px solid var(--border-subtle);
+      border-radius: 10px;
+      padding: 12px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .chart-container img {
+      max-width: 100%;
+      max-height: 320px;
+      border-radius: 6px;
+      object-fit: contain;
+    }
+
+    .chart-caption {
+      font-size: 0.78rem;
+      color: var(--text-dim);
+      margin-top: 8px;
+    }
+
+    /* Bottom footer controls */
+    footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 36px;
+      border-top: 1px solid var(--border-subtle);
+      background: rgba(9, 13, 22, 0.95);
+      z-index: 20;
+    }
+
+    .progress-bar-container {
+      flex: 1;
+      max-width: 400px;
+      height: 4px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 2px;
+      overflow: hidden;
+      margin: 0 24px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--gradient-accent);
+      width: 10%;
+      transition: width 0.3s ease;
+    }
+
+    .deck-nav {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .slide-counter {
+      font-family: 'Fira Code', monospace;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      min-width: 65px;
+      text-align: center;
+    }
+
+    .btn-nav {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid var(--border-subtle);
+      color: var(--text-main);
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .btn-nav:hover:not(:disabled) {
+      background: rgba(255, 255, 255, 0.15);
+      border-color: var(--cyan);
+      color: #fff;
+    }
+
+    .btn-nav:disabled {
+      opacity: 0.3;
+      cursor: not-allowed;
+    }
+
+    /* Speaker Notes Modal */
+    .notes-drawer {
+      position: fixed;
+      bottom: 60px;
+      right: 36px;
+      width: 440px;
+      max-height: 280px;
+      background: rgba(17, 24, 39, 0.96);
+      border: 1px solid var(--border-accent);
+      border-radius: 12px;
+      padding: 16px 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.6);
+      backdrop-filter: blur(20px);
+      z-index: 100;
+      transform: translateY(20px);
+      opacity: 0;
+      pointer-events: none;
+      transition: all 0.25s ease;
+      overflow-y: auto;
+    }
+
+    .notes-drawer.open {
+      transform: translateY(0);
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .notes-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 8px;
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--cyan);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .notes-content {
+      font-size: 0.85rem;
+      color: #d1d5db;
+      line-height: 1.5;
+    }
+
+    /* Keyboard indicator tooltip */
+    .kbd {
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.2);
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-family: 'Fira Code', monospace;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+<body>
+  <div class="ambient-glow"></div>
+  <div class="ambient-glow-2"></div>
+
+  <!-- Header -->
+  <header>
+    <div class="brand">
+      <span class="brand-badge">AegisNIDS</span>
+      <span class="brand-title">Autonomous Two-Layer Intrusion Defense</span>
+    </div>
+
+    <div class="header-pills">
+      <div class="status-pill">10/10 Model Tests</div>
+      <div class="status-pill">14/14 Integration Tests</div>
+      <div class="status-pill">STIX 2.1 Conformance Validated</div>
+    </div>
+
+    <div class="header-actions">
+      <button class="btn-icon" id="toggle-notes" title="Press 'N' for speaker notes">
+        📝 Speaker Notes <span class="kbd">N</span>
+      </button>
+      <button class="btn-icon" id="toggle-fs" title="Press 'F' for Fullscreen">
+        ⛶ Fullscreen <span class="kbd">F</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Presentation Deck Viewport -->
+  <main id="deck-viewport">
+
+    <!-- SLIDE 1 -->
+    <div class="slide active" data-slide="1">
+      <div class="slide-num">Slide 01 // Problem & Motivation</div>
+      <h1 class="slide-title">The Enterprise Intrusion & Line-Rate Crisis</h1>
+      <p class="slide-subtitle">Why traditional signature rules and heavy DPI tools fail against modern encrypted attacks at line speed.</p>
+      
+      <div class="grid-3">
+        <div class="card card-accent-rose">
+          <div class="card-title">🔒 Payload Opacity</div>
+          <div class="card-desc">
+            Over <strong>85%</strong> of enterprise network traffic is encrypted (TLS 1.3, QUIC, DoH). Deep Packet Inspection (DPI) cannot read payloads without breaking forward secrecy via high-latency SSL termination proxies.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">>85%</div>
+            <div class="stat-label">Encrypted Web & Internal Traffic</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">⏱ Line-Rate Bottlenecks</div>
+          <div class="card-desc">
+            Heavy 80+ feature extractors (e.g. CICFlowMeter) buffer packets for up to <strong>25 ms</strong>. On multi-gigabit pipes, flow reassembly queues exhaust memory, leading to packet drops and blind spots.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">>25 ms</div>
+            <div class="stat-label">Traditional Feature Buffer Delay</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-purple">
+          <div class="card-title">⚠️ Alert Fatigue & Inaction</div>
+          <div class="card-desc">
+            Conventional ML engines produce binary alerts ("Attack" vs "Benign") without local reasoning or attribution. Overwhelmed SOC teams suffer fatigue, while attackers move laterally uncontained.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">0 Actions</div>
+            <div class="stat-label">Automated Active Containment</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 2 -->
+    <div class="slide" data-slide="2">
+      <div class="slide-num">Slide 02 // Proposed Solution</div>
+      <h1 class="slide-title">AegisNIDS: Two-Layer Autonomous Defense</h1>
+      <div class="highlight-quote">
+        "AegisNIDS detects network attacks using lightweight ML, determines response severity through a policy engine, contains high-risk traffic in a honeypot, extracts forensic IOCs, and exports standardized STIX 2.1 threat intelligence."
+      </div>
+
+      <div class="grid-4">
+        <div class="card card-accent-cyan">
+          <div class="card-title">1. Zero-DPI ML</div>
+          <div class="card-desc">
+            Inspects packet cadence & flow duration across 12 temporal metrics—100% payload independent.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">1.98 ms</div>
+            <div class="stat-label">End-to-End Pipeline</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-emerald">
+          <div class="card-title">2. Local TreeSHAP</div>
+          <div class="card-desc">
+            Calculates exact feature attributions directly from tree paths in &lt;0.5 ms for plain-English SOC triage.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">&lt;0.5 ms</div>
+            <div class="stat-label">Native Tree Attribution</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">3. 3-Tier Policy</div>
+          <div class="card-desc">
+            Replaces binary switches with graduated control: <code>ALLOW</code>, <code>MONITOR</code>, and <code>QUARANTINE</code>.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">98.87%</div>
+            <div class="stat-label">Quarantine Precision</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-purple">
+          <div class="card-title">4. Decoy & STIX</div>
+          <div class="card-desc">
+            Diverts attackers to Layer 2 honeypot decoys, harvesting IOCs into official OASIS STIX 2.1 threat bundles.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">STIX 2.1</div>
+            <div class="stat-label">OASIS Conformance Pass</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 3 -->
+    <div class="slide" data-slide="3">
+      <div class="slide-num">Slide 03 // System Architecture</div>
+      <h1 class="slide-title">End-to-End Closed-Loop Pipeline</h1>
+      <p class="slide-subtitle">From raw wire packets to automated SIEM threat sharing without human latency.</p>
+
+      <div class="grid-2">
+        <div class="arch-code">
+[ Raw Network Packets / PCAP Stream ]
+              │
+              ▼
+[ 5-Tuple Flow Reconstruction Engine ] ──── (Canonical keys, 5s timeout, μs tracking)
+              │
+              ▼
+[ 12 Zero-DPI Temporal Feature Extractor ] ─ (Flow Duration, Fwd/Bwd/Flow IAT, Idle)
+              │
+              ▼
+[ Layer 1: Aegis-LGBM Engine ] ──────────── (Calibrated gradient boosted decision trees)
+              │
+       ┌──────┴────────────────────────┐
+       ▼                               ▼
+[ Native TreeSHAP Attribution ]   [ 3-Tier Policy Engine ]
+(Exact local root-cause text)     (Calibrated risk score: 0 - 100)
+                                       │
+                 ┌─────────────────────┼─────────────────────┐
+                 ▼                     ▼                     ▼
+          [ ALLOW: &lt; 20 ]       [ MONITOR: 20-74 ]    [ QUARANTINE: &gt;= 75 ]
+          Normal Egress         SOC Watchlist Alert   Divert to Layer 2 Decoy
+                                                             │
+                                                             ▼
+                                                    [ Forensic Honeypot ]
+                                                    (Interactive sandbox)
+                                                             │
+                                                             ▼
+                                                    [ STIX 2.1 Intel Export ]
+        </div>
+
+        <div class="card card-accent-cyan" style="justify-content: space-around;">
+          <div>
+            <div class="card-title">🚀 Core Architectural Advantages</div>
+            <div class="card-desc">
+              • <strong>Streaming Flow Synthesis:</strong> Operates at wire speed using running Welford accumulators without unbounded packet buffering.<br><br>
+              • <strong>Asynchronous Decoy Redirection:</strong> Malicious connections are gracefully sinkholed to avoid TCP resets that tip off adversaries.<br><br>
+              • <strong>Closed-Loop Feedback:</strong> Quarantined telemetry generates fresh attack profiles for gated continuous retraining.
+            </div>
+          </div>
+
+          <div class="grid-2" style="margin-top: 15px;">
+            <div class="stat-box">
+              <div class="stat-val">352 KB</div>
+              <div class="stat-label">Model Footprint</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">>800k</div>
+              <div class="stat-label">Vector Flows/Sec</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 4 -->
+    <div class="slide" data-slide="4">
+      <div class="slide-num">Slide 04 // ML Detection Layer</div>
+      <h1 class="slide-title">Mathematical Modeling of Packet Cadence</h1>
+      <p class="slide-subtitle">Capturing attack kinematics entirely through 12 zero-DPI inter-arrival metrics.</p>
+
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <div class="card-title">📊 The 12 Zero-DPI Temporal Features</div>
+          <div class="card-desc">
+            <table class="data-table">
+              <tr><th>Group</th><th>Features Tracked</th></tr>
+              <tr><td>Forward Cadence</td><td><code>Fwd IAT Mean</code>, <code>Fwd IAT Std</code>, <code>Fwd IAT Max</code>, <code>Fwd IAT Total</code></td></tr>
+              <tr><td>Bidirectional</td><td><code>Flow Duration</code>, <code>Flow IAT Mean</code>, <code>Flow IAT Std</code>, <code>Flow IAT Max</code></td></tr>
+              <tr><td>Backward Response</td><td><code>Bwd IAT Max</code>, <code>Bwd IAT Std</code></td></tr>
+              <tr><td>Session Inactivity</td><td><code>Idle Mean</code>, <code>Idle Max</code></td></tr>
+            </table>
+          </div>
+        </div>
+
+        <div class="card card-accent-emerald">
+          <div class="card-title">⚡ Rigorous Latency Audit (720 Cycles)</div>
+          <div class="card-desc">
+            Measured under warm canonical benchmark workloads:
+          </div>
+          <div class="grid-2" style="margin-top: 10px;">
+            <div class="stat-box">
+              <div class="stat-val">0.20 ms</div>
+              <div class="stat-label">Feature Extraction (p95: 0.31 ms)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">1.21 ms</div>
+              <div class="stat-label">Model Inference (p95: 2.01 ms)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">1.98 ms</div>
+              <div class="stat-label">Total Pipeline (p95: 3.16 ms)</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">10/10</div>
+              <div class="stat-label">Invariant Tests Passed</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 5 -->
+    <div class="slide" data-slide="5">
+      <div class="slide-num">Slide 05 // Three-Tier Response + Honeypot</div>
+      <h1 class="slide-title">Three-Tier Operational Policy & Decoy Containment</h1>
+      <p class="slide-subtitle">Moving from high-stress binary cutoffs to graduated, zero-downtime automated actions.</p>
+
+      <div class="grid-3">
+        <div class="card card-accent-emerald">
+          <div class="card-title">🟢 ALLOW (P &lt; 0.20)</div>
+          <div class="card-desc">
+            Egresses straight to internal business applications.
+            <br><br>
+            • <strong>96.4% Benign Purity</strong> on real network flows.<br>
+            • Ensures legitimate workflows and users experience zero artificial friction.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">96.4%</div>
+            <div class="stat-label">ALLOW Egress Purity</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">🟡 MONITOR (0.20 &le; P &lt; 0.75)</div>
+          <div class="card-desc">
+            Traffic allowed with continuous SOC watchlist logging.
+            <br><br>
+            • Captures suspicious burstiness without business interruption.<br>
+            • Triggers automated MITRE ATT&CK technique mapping.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">80.0%</div>
+            <div class="stat-label">Watchlist Precision</div>
+          </div>
+        </div>
+
+        <div class="card card-accent-rose">
+          <div class="card-title">🔴 QUARANTINE (P &ge; 0.75)</div>
+          <div class="card-desc">
+            High-confidence threats diverted to Layer 2 decoy.
+            <br><br>
+            • <strong>98.87% Quarantine Precision</strong>.<br>
+            • <strong>Only 0.66%</strong> false quarantine rate on real benign flows.<br>
+            • Traps attack payloads in interactive decoys.
+          </div>
+          <div class="stat-box">
+            <div class="stat-val">98.87%</div>
+            <div class="stat-label">Quarantine Precision</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 6 -->
+    <div class="slide" data-slide="6">
+      <div class="slide-num">Slide 06 // IOC Extraction & STIX 2.1 Export</div>
+      <h1 class="slide-title">Actionable Forensic IOCs & OASIS STIX 2.1</h1>
+      <p class="slide-subtitle">Automating the perimeter-to-threat-exchange intelligence cycle.</p>
+
+      <div class="grid-2">
+        <div class="card card-accent-purple">
+          <div class="card-title">🔍 Controlled Honeypot Provenance</div>
+          <div class="card-desc">
+            Verified with RFC 5737 isolated test traffic (<code>192.0.2.77</code>):
+            <div class="arch-code" style="margin-top: 10px; font-size: 0.76rem;">
+Traffic Ingress (192.0.2.77)
+  → P(Attack) = 74.9% (QUARANTINE)
+  → Session Created: HP-SESS-6804
+  → Forensic Log: 7 captured interactions
+  → IOC Harvested: IOC-005 (DDOS_SYN_FLOOD)
+  → STIX 2.1 Indicator: [ipv4-addr:value = '192.0.2.77']
+            </div>
+          </div>
+        </div>
+
+        <div class="card card-accent-cyan">
+          <div class="card-title">🌐 OASIS STIX 2.1 Conformance Pass</div>
+          <div class="card-desc">
+            All indicators exported directly into standardized JSON-STIX bundles:
+            <ul style="margin-top: 8px; margin-left: 20px; font-size: 0.88rem; line-height: 1.6;">
+              <li>Strict RFC 4122 v4 UUID identifiers</li>
+              <li>ISO-8601 UTC microsecond timestamps</li>
+              <li>Valid STIX Pattern Grammar</li>
+              <li><strong>100% Validated</strong> via official <code>python-stix2</code> and <code>stix2patterns</code></li>
+              <li>Directly ingestible into Splunk, Elastic, MISP, & OpenCTI</li>
+            </ul>
+          </div>
+          <div class="stat-box" style="margin-top: 15px;">
+            <div class="stat-val">PASS</div>
+            <div class="stat-label">OASIS Conformance Validation</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 7 -->
+    <div class="slide" data-slide="7">
+      <div class="slide-num">Slide 07 // SOC Dashboard & Native TreeSHAP</div>
+      <h1 class="slide-title">SOC Decision Center & Sub-Millisecond TreeSHAP</h1>
+      <p class="slide-subtitle">Transforming opaque model numbers into decisive, human-readable operational triage.</p>
+
+      <div class="grid-2">
+        <div class="card card-accent-cyan">
+          <div class="card-title">🖥 React SOC Dashboard</div>
+          <div class="card-desc">
+            • <strong>Real-time Telemetry:</strong> Ingestion rates, live flow timeline, active policy tier breakdown.<br><br>
+            • <strong>PCAP Inspection Tool:</strong> Upload and parse PCAP capture files on demand with sub-second turnaround.<br><br>
+            • <strong>Threat Decision Cards:</strong> Real-time mapping to MITRE ATT&CK techniques with severity badges.
+          </div>
+        </div>
+
+        <div class="card card-accent-emerald">
+          <div class="card-title">🌳 Sub-Millisecond TreeSHAP Attribution</div>
+          <div class="card-desc">
+            Calculates exact feature importance values directly from tree nodes in <strong>&lt;0.5 ms</strong>:
+            <div class="highlight-quote" style="margin-top: 12px; font-size: 0.95rem;">
+              "Flagged primarily due to abnormal Fwd IAT Total (+1.2325) and elevated Fwd IAT Mean (+1.2278) [Direct SYN Flood Cadence]"
+            </div>
+            Provides instant causal clarity so analysts can confirm or dismiss alerts in seconds.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 8 -->
+    <div class="slide" data-slide="8">
+      <div class="slide-num">Slide 08 // Real CIC-IDS2017 Results</div>
+      <h1 class="slide-title">Empirical Validation on 20,000 Real Flows</h1>
+      <p class="slide-subtitle">Rigorous benchmark against real Friday & Tuesday enterprise PCAPs.</p>
+
+      <div class="grid-2">
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr><th>Metric</th><th>Empirical Value</th><th>Operational Meaning</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>ROC-AUC</strong></td><td><span class="badge badge-cyan">97.17%</span></td><td>Near-ideal discriminative separation</td></tr>
+              <tr><td><strong>Recall</strong></td><td><span class="badge badge-green">97.41%</span></td><td>9,741 / 10,000 attacks stopped</td></tr>
+              <tr><td><strong>F1-Score</strong></td><td><span class="badge badge-purple">87.51%</span></td><td>Harmonic balance across all vectors</td></tr>
+              <tr><td><strong>DDoS Detection</strong></td><td><span class="badge badge-green">99.97%</span></td><td>3,499 / 3,500 LOIC floods detected</td></tr>
+              <tr><td><strong>PortScan Detection</strong></td><td><span class="badge badge-green">99.89%</span></td><td>3,496 / 3,500 recon scans detected</td></tr>
+              <tr><td><strong>SSH-Patator</strong></td><td><span class="badge badge-green">99.67%</span></td><td>1,495 / 1,500 SSH brute-force caught</td></tr>
+              <tr><td><strong>False Negatives</strong></td><td><span class="badge badge-rose">2.59%</span></td><td>Perimeter evasion rate minimized</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="chart-container">
+          <img src="roc_curve.png" alt="ROC Curve (97.17% AUC)">
+          <div class="chart-caption">Empirical ROC Curve (ROC-AUC = 97.17%) across 20,000 real flows</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 9 -->
+    <div class="slide" data-slide="9">
+      <div class="slide-num">Slide 09 // Model Comparison & Limitations</div>
+      <h1 class="slide-title">Model A vs. Model B & Scientific Limitations</h1>
+      <p class="slide-subtitle">Comparative evaluation on Tuesday Patator authentication brute force.</p>
+
+      <div class="grid-2">
+        <div class="data-table-container">
+          <table class="data-table">
+            <thead>
+              <tr><th>Dimension</th><th>Model A (12 Feat)</th><th>Model B (24 Feat)</th><th>Gain / Delta</th></tr>
+            </thead>
+            <tbody>
+              <tr><td><strong>Feature Space</strong></td><td>Temporal Only</td><td>Temporal + Port + Flags</td><td>+12 transport features</td></tr>
+              <tr><td><strong>F1-Score</strong></td><td>88.37%</td><td><span class="badge badge-green">99.86%</span></td><td><span class="badge badge-green">+11.49%</span></td></tr>
+              <tr><td><strong>Precision</strong></td><td>79.28%</td><td><span class="badge badge-green">99.71%</span></td><td>Eliminates LAN noise</td></tr>
+              <tr><td><strong>FPR</strong></td><td>18.05%</td><td><span class="badge badge-cyan">0.20%</span></td><td>90x false alarm drop</td></tr>
+              <tr><td><strong>FTP Recall</strong></td><td>82.41%</td><td><span class="badge badge-green">99.98%</span></td><td>Resolves timing blind spot</td></tr>
+              <tr><td><strong>Latency Delta</strong></td><td>1.154 ms</td><td>1.171 ms</td><td>Only +17 μs latency</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="card card-accent-amber">
+          <div class="card-title">🔬 Documented Research Limitations</div>
+          <div class="card-desc">
+            <strong>1. Cross-Attack Cadence Divergence:</strong><br>
+            Models trained exclusively on volumetric floods achieve only 21.4% zero-shot recall on brute force due to different timing physics. Multi-vector training is mathematically essential.<br><br>
+            <strong>2. CSE-CIC-IDS2018 Label Status:</strong><br>
+            Parquet file exists locally (39,940 flows) but lacks ground-truth labels. Explicitly audited and classified as <strong><code>AVAILABLE, NOT VALIDATED</code></strong> to ensure strict scientific honesty.
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- SLIDE 10 -->
+    <div class="slide" data-slide="10">
+      <div class="slide-num">Slide 10 // Conclusion & Future Work</div>
+      <h1 class="slide-title">Conclusion & Operational Impact</h1>
+      <div class="highlight-quote">
+        "AegisNIDS proves that zero-DPI temporal features provide enterprise-grade detection (97.17% ROC-AUC) while eliminating TLS decryption overhead and enabling automated, zero-touch forensic containment."
+      </div>
+
+      <div class="grid-3">
+        <div class="card card-accent-cyan">
+          <div class="card-title">🛡 Complete Closed Loop</div>
+          <div class="card-desc">
+            Demonstrated a fully functional pipeline from raw network flows to calibrated response, interactive honeypots, and OASIS STIX 2.1 intelligence sharing.
+          </div>
+        </div>
+
+        <div class="card card-accent-emerald">
+          <div class="card-title">⚡ Line-Rate Feasibility</div>
+          <div class="card-desc">
+            With <strong>1.98 ms</strong> median pipeline latency and <strong>352 KB</strong> memory footprint, AegisNIDS fits seamlessly into edge gateways and DMZ perimeter appliances.
+          </div>
+        </div>
+
+        <div class="card card-accent-purple">
+          <div class="card-title">🔮 Future Horizons</div>
+          <div class="card-desc">
+            • Kernel-space eBPF/XDP bypass for 10+ Gbps line rate.<br>
+            • Self-supervised flow representation learning across enterprise environments.<br>
+            • Automated policy threshold adaptation.
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- Speaker Notes Drawer -->
+  <aside class="notes-drawer" id="notes-drawer">
+    <div class="notes-header">
+      <span>Speaker Notes</span>
+      <span id="notes-slide-title">Slide 1</span>
+    </div>
+    <div class="notes-content" id="notes-body">
+      Welcome everyone. Today we are presenting AegisNIDS, an autonomous, two-layer network intrusion detection and forensic quarantine system designed specifically for the encrypted, line-rate enterprise network.
+    </div>
+  </aside>
+
+  <!-- Footer Controls -->
+  <footer>
+    <div class="deck-nav">
+      <button class="btn-nav" id="btn-prev" title="Previous Slide (Left Arrow)">◀</button>
+      <div class="slide-counter"><span id="curr-slide">1</span> / <span id="total-slides">10</span></div>
+      <button class="btn-nav" id="btn-next" title="Next Slide (Right Arrow, Space)">▶</button>
+    </div>
+
+    <div class="progress-bar-container">
+      <div class="progress-fill" id="progress-fill"></div>
+    </div>
+
+    <div style="font-size: 0.82rem; color: var(--text-dim);">
+      Use <span class="kbd">←</span> <span class="kbd">→</span> or <span class="kbd">Space</span> to navigate • Press <span class="kbd">F</span> for Fullscreen
+    </div>
+  </footer>
+
+  <script>
+    const speakerNotes = {
+      1: "Welcome everyone. Today we are presenting AegisNIDS. Modern enterprise networks face two colliding bottlenecks: first, over 85% of traffic is encrypted with TLS 1.3 or QUIC, making traditional deep packet inspection impossible without intrusive decryption. Second, heavy feature extraction creates unacceptable latency queues. Conventional NIDS either drown analysts in unexplained alerts or do nothing to contain attacks.",
+      2: "Our core contribution is AegisNIDS: an autonomous system that uses lightweight ML to detect attacks purely from temporal flow dynamics, evaluates severity through a 3-tier policy engine, contains threats in a honeypot, extracts forensic IOCs, and exports standardized STIX 2.1 intelligence.",
+      3: "Here is our end-to-end architecture. Packets are reconstructed into 5-tuple flows using microsecond accumulators. Our zero-DPI extractor pulls 12 temporal metrics. Aegis-LGBM computes risk. If the score is high, traffic is diverted to our honeypot decoy, where an automated IOC harvester generates OASIS-validated STIX 2.1 threat intelligence bundles.",
+      4: "Our ML layer is designed for speed. We only use 12 temporal features—flow duration, forward/backward IATs, and idle times. The model weights are only 352 KB. In our audited 720 benchmark cycles, the median end-to-end pipeline latency was just 1.98 ms.",
+      5: "Instead of a brittle binary threshold, we engineered a calibrated three-tier policy. Below 20 is ALLOW, which achieved 96.4% purity on real traffic. Between 20 and 74 is MONITOR, generating MITRE alerts on our watchlist. At 75 and above, traffic is automatically quarantined to our honeypot with 98.87% precision and a 0.66% false quarantine rate.",
+      6: "This is our controlled honeypot provenance. Using RFC 5737 isolated test traffic from 192.0.2.77, we verified that the attacker was quarantined into session HP-SESS-6804, extracted as IOC-005, and compiled into a STIX 2.1 bundle that passed strict schema validation with OASIS python-stix2.",
+      7: "For the SOC analyst, we provide a modern React monitoring dashboard backed by native TreeSHAP. Because TreeSHAP evaluates tree paths directly, it executes in under 0.5 ms and generates plain-English root-cause explanations like 'abnormal Fwd IAT Total (+1.2325)' rather than black-box probabilities.",
+      8: "Here are our real-world results evaluated across 20,000 flows from the benchmark CIC-IDS2017 dataset. We achieved a 97.17% ROC-AUC and 97.41% recall. LOIC floods were caught at 99.97%, and reconnaissance port scans at 99.89%.",
+      9: "We also evaluated Model A against Model B on authentication brute-force attacks. While Model A had an 82.4% recall on FTP brute force due to timing overlap, Model B added 12 transport features, boosting F1 to 99.86% and dropping false alarms to 0.20%, with only 17 microseconds added latency. We also transparently note that CSE-CIC-IDS2018 is present but unvalidated due to missing ground-truth labels.",
+      10: "In conclusion, AegisNIDS demonstrates that encrypted network attacks can be caught at wire speed without payload inspection. We have validated every tier from raw packets to STIX threat intel. Thank you, and we welcome your questions."
+    };
+
+    const slides = document.querySelectorAll('.slide');
+    const totalSlides = slides.length;
+    let currentSlide = 1;
+
+    const currSlideEl = document.getElementById('curr-slide');
+    const totalSlidesEl = document.getElementById('total-slides');
+    const progressFill = document.getElementById('progress-fill');
+    const btnPrev = document.getElementById('btn-prev');
+    const btnNext = document.getElementById('btn-next');
+    const notesDrawer = document.getElementById('notes-drawer');
+    const notesTitle = document.getElementById('notes-slide-title');
+    const notesBody = document.getElementById('notes-body');
+    const toggleNotesBtn = document.getElementById('toggle-notes');
+    const toggleFsBtn = document.getElementById('toggle-fs');
+
+    totalSlidesEl.textContent = totalSlides;
+
+    function showSlide(index) {
+      if (index < 1 || index > totalSlides) return;
+      currentSlide = index;
+
+      slides.forEach((s, idx) => {
+        if (idx + 1 === currentSlide) {
+          s.classList.add('active');
+        } else {
+          s.classList.remove('active');
+        }
+      });
+
+      currSlideEl.textContent = currentSlide;
+      progressFill.style.width = ((currentSlide / totalSlides) * 100) + '%';
+
+      btnPrev.disabled = currentSlide === 1;
+      btnNext.disabled = currentSlide === totalSlides;
+
+      // Update speaker notes
+      notesTitle.textContent = `Slide ${currentSlide}`;
+      notesBody.textContent = speakerNotes[currentSlide] || "No notes available.";
+    }
+
+    btnPrev.addEventListener('click', () => showSlide(currentSlide - 1));
+    btnNext.addEventListener('click', () => showSlide(currentSlide + 1));
+
+    toggleNotesBtn.addEventListener('click', () => {
+      notesDrawer.classList.toggle('open');
+    });
+
+    toggleFsBtn.addEventListener('click', () => {
+      if (!document.fullscreenElement) {
+        document.documentElement.requestFullscreen().catch(err => console.log(err));
+      } else {
+        document.exitFullscreen().catch(err => console.log(err));
+      }
+    });
+
+    // Keyboard navigation
+    window.addEventListener('keydown', (e) => {
+      if (e.key === 'ArrowRight' || e.key === ' ' || e.key === 'PageDown') {
+        showSlide(currentSlide + 1);
+      } else if (e.key === 'ArrowLeft' || e.key === 'PageUp') {
+        showSlide(currentSlide - 1);
+      } else if (e.key === 'Home') {
+        showSlide(1);
+      } else if (e.key === 'End') {
+        showSlide(totalSlides);
+      } else if (e.key === 'n' || e.key === 'N') {
+        notesDrawer.classList.toggle('open');
+      } else if (e.key === 'f' || e.key === 'F') {
+        toggleFsBtn.click();
+      }
+    });
+
+    // Initialize
+    showSlide(1);
+  </script>
+</body>
+</html>

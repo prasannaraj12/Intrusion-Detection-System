@@ -1,0 +1,6 @@
+Attack,Samples,Detected,Missed,Recall,Precision,F1,MetricType
+BENIGN,10000,7479,2521,74.79,100.0,74.79,Specificity
+PortScan,3500,3496,4,99.89,79.44,88.5,Recall
+DDoS,3500,3499,1,99.97,79.44,88.53,Recall
+SSH-Patator,1500,1495,5,99.67,79.44,88.41,Recall
+FTP-Patator,1500,1251,249,83.4,79.44,81.37,Recall
